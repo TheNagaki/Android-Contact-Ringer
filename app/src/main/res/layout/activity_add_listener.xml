@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    android:background="@color/black"
+    android:orientation="vertical"
+    tools:context=".views.AddListenerActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="@string/add_listener_title"
+        android:textAlignment="center"
+        android:textColor="@color/start_blue"
+        android:textSize="32sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_weight="0"
+            app:counterEnabled="true"
+            app:counterMaxLength="50"
+            app:counterTextColor="@color/light_grey">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/listener_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/listener_name_placeholder" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_weight="0"
+            app:counterEnabled="true"
+            app:counterMaxLength="150"
+            app:counterTextColor="@color/light_grey">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/listener_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/listener_message_placeholder" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/filter_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:backgroundTint="@color/start_blue" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="0"
+        android:background="@drawable/message_list_bg"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/add_listener_btn"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:src="@drawable/check_true" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/cancel_listener_btn"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:src="@drawable/check_false" />
+    </LinearLayout>
+</LinearLayout>

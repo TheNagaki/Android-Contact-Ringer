@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">My Android Utils</string>
+    <string name="main_activity_button">Start Application</string>
+    <string name="title_activity_start">StartActivity</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+    <string name="lorem">Lorem Ipsum</string>
+    <string name="menu_item_toggle">Toggle</string>
+    <string name="menu_item_edit">Edit</string>
+    <string name="menu_item_delete">Delete</string>
+    <string name="add_listener_title">Add listener</string>
+    <string name="listener_name_placeholder">Name</string>
+    <string name="listener_message_placeholder">Message to listen to</string>
+</resources>
