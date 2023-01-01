@@ -2,7 +2,7 @@
     <string name="app_name">My Android Utils</string>
     <string name="main_activity_button">Start Application</string>
     <string name="title_activity_start">StartActivity</string>
-    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+    <string name="lorem_ipsum">This is a message.</string>
     <string name="lorem">Lorem Ipsum</string>
     <string name="menu_item_toggle">Toggle</string>
     <string name="menu_item_edit">Edit</string>
@@ -10,4 +10,15 @@
     <string name="add_listener_title">Add listener</string>
     <string name="listener_name_placeholder">Name</string>
     <string name="listener_message_placeholder">Message to listen to</string>
+    <string name="spinner_prompt">Select a ringbell</string>
+    <string name="ring_spinner_label">Ring bell :</string>
+    <string name="duration_label">Duration :</string>
+    <string name="message_label">Message :</string>
+    <string name="number_ipsum">123456</string>
+    <string name="duration_unit">s</string>
+    <string name="bell_label">Bell :</string>
+    <string name="listener_enabled">Listener is enabled</string>
+    <string name="base_duration">0</string>
+    <string name="arrow_up">Arrow up</string>
+    <string name="arrow_down">Arrow down</string>
 </resources>

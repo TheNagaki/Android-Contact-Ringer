@@ -1,4 +1,4 @@
-package thenagaki.projects.myandroidutils.views
+package thenagaki.projects.myandroidutils.activities
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -10,16 +10,21 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import thenagaki.projects.myandroidutils.R
+import thenagaki.projects.myandroidutils.activities.adapters.MessageListAdapter
+import thenagaki.projects.myandroidutils.data.MessageSubscribed
+import thenagaki.projects.myandroidutils.data.MessageViewModel
 import thenagaki.projects.myandroidutils.databinding.ActivityMainBinding
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var messageListVm: MessageViewModel
     private lateinit var binding: ActivityMainBinding
     private lateinit var notificationManager: NotificationManager
-    private lateinit var notificationChannel: NotificationChannel
-    private lateinit var builder: Notification.Builder
+    private lateinit var adapter: MessageListAdapter
     private val channelId = "com.thenagaki.projects.myapplication"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +34,32 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        initRecyclerView()
+        initViewModel()
+        initStartAppButton()
+        initAddBtn()
+    }
+
+    private fun initRecyclerView() {
+        adapter = MessageListAdapter(::deleteHandler, ::updateHandler)
+        binding.messageList.adapter = adapter
+        binding.messageList.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun updateHandler(messageSubscribed: MessageSubscribed) {
+        messageListVm.update(messageSubscribed)
+    }
+
+    private fun deleteHandler(message: MessageSubscribed) {
+        messageListVm.delete(message)
+    }
+
+    private fun initViewModel() {
+        messageListVm = ViewModelProvider(this)[MessageViewModel::class.java]
+        messageListVm.readAllData?.observe(this) { a -> adapter.setData(a) }
+    }
+
+    private fun initStartAppButton() {
         binding.startAppButton.setOnClickListener {
             Thread {
                 while (true) {
@@ -37,9 +68,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }.start()
         }
+    }
 
+    private fun initAddBtn() {
         binding.addListenerBtn.setOnClickListener {
-            startActivity(Intent(this, AddListenerActivity::class.java))
+            startActivity(Intent(this, EditListenerActivity::class.java))
         }
     }
 
@@ -54,11 +87,11 @@ class MainActivity : AppCompatActivity() {
         val pendingIntent =
             PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        notificationChannel =
+        val notificationChannel =
             NotificationChannel(
                 channelId,
                 "This notification should run while the application is working.",
-                NotificationManager.IMPORTANCE_HIGH
+                NotificationManager.IMPORTANCE_DEFAULT
             )
         notificationChannel.enableLights(true)
         notificationChannel.lightColor = Color.GREEN
@@ -68,7 +101,7 @@ class MainActivity : AppCompatActivity() {
         val hour = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
         val currentDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
 
-        builder = Notification.Builder(this, channelId)
+        val builder = Notification.Builder(this, channelId)
             .setContentText("App currently enabled ( $hour the $currentDate )")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setLargeIcon(
